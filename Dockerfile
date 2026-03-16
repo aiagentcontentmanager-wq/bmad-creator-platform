@@ -9,6 +9,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src ./src
 COPY config ./config
+COPY landing ./landing
 COPY .env.example .env
 
 RUN mkdir -p /app/data && chown -R app:app /app
