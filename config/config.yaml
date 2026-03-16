@@ -1,0 +1,17 @@
+# Beispiel-Konfigurationsdatei für den ModelOrchestrator
+
+# Pfad zu den Modellen
+model_paths:
+  - "models/model1.pkl"
+  - "models/model2.pkl"
+
+# Standardparameter für die Modelle
+default_parameters:
+  batch_size: 32
+  learning_rate: 0.001
+  epochs: 10
+
+# Ausgabeoptionen
+output:
+  format: "json"
+  path: "output/results.json"

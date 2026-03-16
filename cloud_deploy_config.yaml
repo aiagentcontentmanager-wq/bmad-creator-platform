@@ -1,0 +1,62 @@
+# Cloud Deployment-Konfiguration für Supabase
+
+# Supabase-spezifische Einstellungen
+supabase:
+  project_id: "your-supabase-project-id"
+  api_url: "https://your-supabase-project-id.supabase.co"
+  public_anon_key: "your-supabase-anon-key"
+  service_role_key: "your-supabase-service-role-key"
+
+# Container-Ports
+ports:
+  - "8080:8080"
+
+# Umgebungsvariablen
+environment:
+  ENV: "production"
+  LOG_LEVEL: "INFO"
+  MAX_QUOTA: "100"
+  SUPABASE_URL: "https://your-supabase-project-id.supabase.co"
+  SUPABASE_KEY: "your-supabase-anon-key"
+
+# Netzwerkkonfiguration
+networks:
+  - "supabase_network"
+
+# Ressourcenbeschränkungen
+resources:
+  limits:
+    cpus: "1.0"
+    memory: "1GB"
+  reservations:
+    cpus: "0.5"
+    memory: "512MB"
+
+# Skalierungseinstellungen
+scaling:
+  min_replicas: 1
+  max_replicas: 2
+  auto_scaling:
+    enabled: true
+    cpu_threshold: 70
+    memory_threshold: 80
+
+# Datenbankkonfiguration
+database:
+  host: "db.your-supabase-project-id.supabase.co"
+  port: 5432
+  user: "postgres"
+  password: "your-supabase-db-password"
+  name: "postgres"
+
+# Storage-Konfiguration
+storage:
+  provider: "supabase"
+  bucket: "your-supabase-storage-bucket"
+  endpoint: "https://your-supabase-project-id.supabase.co/storage/v1"
+
+# Authentifizierungskonfiguration
+auth:
+  provider: "supabase"
+  jwt_secret: "your-supabase-jwt-secret"
+  redirect_url: "https://your-app-domain.com/auth/callback"

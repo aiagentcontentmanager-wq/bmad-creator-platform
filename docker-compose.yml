@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  bmad:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - bmad_data:/app/data
+    restart: unless-stopped
+    networks:
+      - bmad_net
+
+  # Optional: Redis for rate limiting & caching
+  # redis:
+  #   image: redis:7-alpine
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis_data:/data
+  #   networks:
+  #     - bmad_net
+
+  # Optional: Ollama for local AI
+  # ollama:
+  #   image: ollama/ollama
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama_data:/root/.ollama
+  #   networks:
+  #     - bmad_net
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             count: 1
+  #             capabilities: [gpu]
+
+volumes:
+  bmad_data:
+  # redis_data:
+  # ollama_data:
+
+networks:
+  bmad_net:
+    driver: bridge

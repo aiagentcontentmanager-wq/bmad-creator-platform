@@ -1,0 +1,30 @@
+# Deployment-Konfiguration für den ModelOrchestrator (Supabase)
+
+# Container-Ports
+ports:
+  - "8080:8080"
+
+# Umgebungsvariablen
+environment:
+  ENV: "production"
+  LOG_LEVEL: "INFO"
+  MAX_QUOTA: "100"
+  SUPABASE_URL: "https://your-supabase-project-id.supabase.co"
+  SUPABASE_KEY: "your-supabase-anon-key"
+
+# Volumes für persistente Daten
+volumes:
+  - "/app/data:/app/data"
+
+# Netzwerkkonfiguration
+networks:
+  - "supabase_network"
+
+# Ressourcenbeschränkungen
+resources:
+  limits:
+    cpus: "1.0"
+    memory: "1GB"
+  reservations:
+    cpus: "0.5"
+    memory: "512MB"
